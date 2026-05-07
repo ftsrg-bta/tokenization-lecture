@@ -60,3 +60,25 @@ jobs:
       - name: Run Forge build
         working-directory: ${{ env.wd }}
         run: forge build --sizes
+  amm:
+    name: Build AMM demo project
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      wd: ./03-amm
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Show Forge version
+        run: forge --version
+      - name: Run Forge fmt
+        working-directory: ${{ env.wd }}
+        run: forge fmt --check
+      - name: Run Forge build
+        working-directory: ${{ env.wd }}
+        run: forge build --sizes
